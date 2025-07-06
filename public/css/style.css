@@ -1,0 +1,202 @@
+a {
+    text-decoration: none !important;
+}
+
+.navbar {
+    height: 5rem;
+    background-color: #E8F5E9;
+}
+
+.nav-link {
+    color: red !important;
+}
+
+.f-info-links a {
+    text-decoration: none;
+    color: red;
+}
+
+.f-info-links {
+    width: 100%;
+}
+
+.f-info-socials {
+    width: 100%;
+    font-size: 2rem;
+}
+
+.f-info {
+    text-align: center;
+    display: flex;
+    height: 8rem;
+    background-color: #A5D6A7;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#map {
+    width: 100%;
+    height: 500px;
+}
+
+.listing-card {
+    border: none !important;
+    margin-bottom: 2rem;
+}
+
+.card {
+    border: 2px solid black;
+}
+
+.card-img-top {
+    border-top-left-radius: 8px !important;
+    border-top-right-radius: 8px !important;
+    width: 100% !important;
+    object-fit: cover !important;
+}
+
+.card-body {
+    padding: 0 !important;
+}
+
+.card-text p {
+    font-weight: 400;
+}
+
+.card-img-overlay:hover {
+    opacity: 0.2;
+    background-color: white;
+}
+
+.newform,
+.editform {
+    margin-left: 10rem;
+}
+
+input,
+textarea {
+    width: 50rem !important;
+    /* Adjust as needed */
+}
+
+.price {
+    width: 30rem !important;
+}
+
+.showbtns {
+    display: flex;
+}
+
+.listing-card {
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.listing-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.card-img-top {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+
+.navbar {
+    background-color: #E8F5E9 !important;  /* Soft Pastel Green */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    padding: 0.75rem 1rem;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #1B5E20 !important; /* Dark Green for contrast */
+}
+
+.navbar-nav .nav-link {
+    font-size: 1rem;
+    font-weight: 500;
+    color: black !important; /* Medium Green */
+    transition: color 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #1B5E20 !important; /* Dark Green on hover */
+    transform: scale(1.05);
+}
+
+.navbar-toggler {
+    border: none;
+    outline: none;
+}
+
+.navbar-toggler-icon {
+    filter: brightness(0.3);
+}
+
+.border-bottom {
+    border-bottom: 2px solid #A5D6A7 !important; /* Light green border */
+}
+
+.sticky-top {
+    position: sticky;
+    top: 0;
+    z-index: 1030;
+}
+
+
+/* Ensure the page takes the full viewport height */
+html, body {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Push footer to the bottom */
+footer {
+    margin-top: auto;
+    width: 100%;
+    background-color: #f8f9fa; /* Light background */
+    padding: 1rem 0;
+    text-align: center;
+}
+
+.listing-actions {
+    display: flex;
+    justify-content: center; /* Center buttons horizontally */
+    margin-top: 20px; /* Add some space above the buttons */
+  }
+  
+  .like-button,
+  .share-button {
+    background-color: #f0f0f0; /* Light gray background */
+    border: 1px solid #ccc; /* Light gray border */
+    padding: 10px 20px;
+    margin: 0 10px; /* Add space between buttons */
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center; /* Align icon and text vertically */
+    font-size: 16px;
+    transition: background-color 0.3s ease; /* Smooth hover effect */
+  }
+  
+  .like-button i,
+  .share-button i {
+    margin-right: 8px; /* Add space between icon and text */
+  }
+  
+  .like-button:hover,
+  .share-button:hover {
+    background-color: #e0e0e0; /* Darker gray on hover */
+  }
+  
+  .like-button.liked { /* style when liked */
+      background-color: #ffcccc;
+      border-color: #ff9999;
+  }
+  
+  .like-button.liked:hover{
+      background-color: #ffb3b3;
+  }

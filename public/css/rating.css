@@ -1,0 +1,25 @@
+.rating input {
+  display: none;
+}
+
+/* Star container */
+.rating {
+  display: flex;
+  flex-direction: row-reverse; /* Ensures the stars fill from left to right */
+  justify-content: center;
+}
+
+/* Star styles */
+.rating label {
+  font-size: 2rem;
+  color: gray;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+/* Highlight stars when selected */
+.rating input:checked ~ label,
+.rating label:hover,
+.rating label:hover ~ label {
+  color: gold;
+}

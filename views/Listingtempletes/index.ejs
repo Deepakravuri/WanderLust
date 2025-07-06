@@ -1,0 +1,191 @@
+<% layout("/layouts/header") %>
+
+  <body>
+    <!-- Filters & Price Toggle Section -->
+    <div class="container mt-4">
+      <div class="d-flex justify-content-center align-items-center gap-4 flex-wrap">
+        <div class="filter-option text-center">
+          <a href="/listings/filters/Pool">
+            <span class="filter-text fw-semibold">Pool</span><br>
+            <i class="fa-solid fa-water-ladder fa-2x"></i>
+          </a>
+        </div>
+        <div class="filter-option text-center">
+          <a href="/listings/filters/Wi-Fi">
+            <span class="filter-text fw-semibold">Wi-Fi</span> <br>
+            <i class="fa-solid fa-wifi fa-2x"></i>
+          </a>
+        </div>
+        <div class="filter-option text-center">
+          <a href="/listings/filters/ParkSpace">
+          <span class="filter-text fw-semibold">Parking</span> <br>
+          <i class="fa-solid fa-car fa-2x"></i>
+        </a>
+        </div>
+        <div class="filter-option text-center">
+          <a href="/listings/filters/PetFriendly">
+          <span class="filter-text fw-semibold">Pet Friendly</span>
+          <i class="fa-solid fa-paw fa-2x"></i>
+        </a>
+        </div>
+        <div class="filter-option text-center">
+          <a href="/listings/filters/Budget">
+          <span class="filter-text fw-semibold">On Budget</span>
+          <i class="fa-solid fa-tag fa-2x"></i>
+        </a>
+        </div>
+        <div class="filter-option text-center">
+          <a href="/listings/filters/BeachSide">
+          <span class="filter-text fw-semibold">Beachside</span>
+          <i class="fa-solid fa-umbrella-beach fa-2x"></i>
+        </a>
+        </div>
+        <div class="filter-option text-center">
+          <a href="/listings/filters/Mountains">
+          <span class="filter-text fw-semibold">Mountains</span> <br>
+          <i class="fa-solid fa-mountain fa-2x"></i>
+        </a>
+        </div>
+        <div class="filter-option text-center">
+          <a href="/listings/filters/Boat">
+          <span class="filter-text fw-semibold">Boating</span>
+          <i class="fa-solid fa-sailboat fa-2x"></i>
+        </a>
+        </div>
+        <div class="price-toggle text-center ms-4">
+          <span class="fw-semibold">Show Prices with Taxes</span>
+          <label class="switch">
+            <input type="checkbox" id="priceToggle">
+            <span class="slider round"></span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Listings Section -->
+    <div class="container mt-4">
+      <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 g-4">
+        <% for(let listing of allListings) { %>
+          <div class="col">
+            <a href="/listings/<%= listing.id %>" class="text-decoration-none">
+              <div class="card listing-card shadow-sm border-0 rounded overflow-hidden">
+                <img src="<%= listing.image.url %>" class="card-img-top" alt="<%= listing.image.filename %>"
+                  style="height: 18rem; object-fit: cover;">
+                <div class="card-body text-center">
+                  <h5 class="card-title text-dark fw-bold">
+                    <%= listing.title %>
+                  </h5>
+                  <p class="card-text text-muted">
+                    &#8377; <span class="price-value" data-price="<%= listing.price %>">
+                      <%= listing.price.toLocaleString("en-IN") %>
+                    </span> / night
+                  </p>
+                </div>
+              </div>
+            </a>
+          </div>
+          <% } %>
+      </div>
+    </div>
+
+    <style>
+      /* Filters Styling */
+.filter-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  width: 110px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.filter-option:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+  transform: scale(1.05);
+}
+
+.filter-text {
+  font-size: 15px;
+  color: #222;
+}
+
+/* Listing Cards */
+.listing-card {
+  border-radius: 15px;
+  transition: 0.3s ease-in-out;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.listing-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Toggle Switch */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 26px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 26px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background: linear-gradient(45deg, #ff6b6b, #007bff);
+}
+
+input:checked + .slider:before {
+  transform: translateX(24px);
+}
+
+    </style>
+
+    <script>
+      document.getElementById("priceToggle").addEventListener("change", function () {
+        let prices = document.querySelectorAll(".price-value");
+        let isTaxIncluded = this.checked;
+        prices.forEach(price => {
+          let basePrice = parseFloat(price.getAttribute("data-price"));
+          let finalPrice = isTaxIncluded ? (basePrice * 1.18).toFixed(0) : basePrice.toFixed(0);
+          price.innerHTML = parseInt(finalPrice).toLocaleString("en-IN");
+        });
+      });
+    </script>
+
+  </body>

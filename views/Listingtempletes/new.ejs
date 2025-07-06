@@ -1,0 +1,73 @@
+<% layout("/layouts/header") %>
+
+<body>
+  <div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <div class="card p-4 shadow-lg border-0 rounded">
+      <h3 class="text-center text-dark fw-bold">Create a New Listing</h3>
+      <hr class="mb-3">
+      
+      <form method="POST" action="/listings" class="needs-validation" novalidate>
+        
+        <div class="mb-3">
+          <label for="title" class="form-label fw-semibold">Title</label>
+          <input name="listing[title]" placeholder="Enter title" type="text" class="form-control" required/>
+        </div>
+
+        <div class="mb-3">
+          <label for="description" class="form-label fw-semibold">Description</label>
+          <textarea name="listing[description]" placeholder="Enter description" class="form-control" required></textarea>
+        </div>
+
+        <div class="mb-3">
+          <label for="image" class="form-label fw-semibold">Filename</label>
+          <input name="listing[image][filename]" placeholder="Enter filename" type="text" class="form-control" required/>
+        </div>
+
+        <div class="mb-3">
+          <label for="url" class="form-label fw-semibold">Image URL</label>
+          <input type="text" name="listing[image][url]" placeholder="Enter image URL/Link" class="form-control">
+        </div>
+
+        <div class="mb-3">
+          <label for="price" class="form-label fw-semibold">Price</label>
+          <input name="listing[price]" placeholder="Enter price" type="number" class="form-control" required/>
+        </div>
+
+        <div class="mb-3">
+          <label for="country" class="form-label fw-semibold">Country</label>
+          <input name="listing[country]" placeholder="Enter country" type="text" class="form-control" required/>
+        </div>
+
+        <div class="mb-3">
+          <label for="location" class="form-label fw-semibold">Location</label>
+          <input name="listing[location]" placeholder="Enter location" type="text" class="form-control" required/>
+        </div>
+
+        <div class="mb-3">
+          <label for="filter" class="form-label fw-semibold">Add Filter</label>
+          <input name="listing[filter]" placeholder="Enter filter" type="text" class="form-control" required/>
+        </div>
+
+        <button class="btn btn-dark w-100 fw-semibold">Add Listing</button> 
+
+      </form>
+    </div>
+  </div>
+
+  <style>
+    .form-control {
+      border-radius: 10px;
+      transition: 0.3s ease-in-out;
+    }
+    .form-control:focus {
+      border-color: #333;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+    .btn-dark:hover {
+      background-color: #222;
+    }
+    .card {
+      border-radius: 15px;
+    }
+  </style>
+</body>

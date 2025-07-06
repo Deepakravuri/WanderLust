@@ -1,0 +1,146 @@
+<% layout("/layouts/header") %>
+    <body class="bg-light ">
+        <div class="container mt-3">
+            <!-- Listing Title -->
+            <h2 class="text-center mb-4 text-danger fw-bold">
+                <%= listing.title %>
+                    <div class="listing-actions">
+                        <button class="like-button">
+                            <i class="fas fa-heart"></i> Like
+                        </button>
+                        <button class="share-button" id="shareButton">
+                            <i class="fas fa-share-alt"></i> Share
+                        </button>
+                    </div>
+            </h2>
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="card shadow-lg p-3 mb-4 bg-white rounded">
+                        <img src="<%= listing.image.url %>" class="card-img-top rounded"
+                            alt="<%= listing.image.filename %>" style="height: 300px; object-fit: cover;">
+                        <div class="card-body text-center">
+                            <h5 class="card-title fw-bold">Owner: <span class="text-primary">@<%= listing.owner.username
+                                        %></span></h5>
+                            <p class="text-muted">
+                                <%= listing.description %>
+                            </p>
+                            <h4 class="text-success">&#8377; <%= listing.price.toLocaleString("en-IN") %>
+                            </h4>
+                            <p><i class="fa-solid fa-map-marker-alt"></i> <b>
+                                    <%= listing.location %>, <%= listing.country %>
+                                </b></p>
+                            <p class="text-muted">
+                                <%= listing.filter %>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Edit & Delete Buttons -->
+            <% if(curruser && curruser._id.equals(listing.owner._id)) { %>
+                <div class="text-center">
+                    <a href="/listings/<%= listing._id %>/edit" class="btn btn-outline-primary me-3">Edit</a>
+                    <form method="POST" action="/listings/<%=listing._id%>?_method=DELETE" class="d-inline">
+                        <button class="btn btn-outline-danger">Delete</button>
+                    </form>
+                </div>
+                <% } %>
+                    <hr class="mt-4">
+                    <!-- Rating & Reviews Section -->
+                    <div class="row justify-content-center">
+                        <div class="col-md-8">
+                            <% if(curruser) { %>
+                                <h3 class="text-center text-dark mb-3">Rate Us</h3>
+                                <form action="/listings/<%= listing._id %>/reviews" method="post"
+                                    class="needs-validation">
+                                    <div class="rating text-center">
+                                        <% for (let i=5; i> 0; i--) { %>
+                                            <input type="radio" id="star<%= i %>" name="review[rating]"
+                                                value="<%= i %>" />
+                                            <label for="star<%= i %>">★</label>
+                                            <% } %>
+                                    </div>
+                                    <label for="comment" class="form-label mt-3">Comments</label>
+                                    <textarea id="comment" name="review[comment]" class="form-control" rows="3"
+                                        required></textarea>
+                                    <div class="text-center mt-3">
+                                        <button class="btn btn-dark">Add Review</button>
+                                    </div>
+                                </form>
+                                <% } %>
+                        </div>
+                    </div>
+                    <!-- Reviews List -->
+                    <div class="row justify-content-center mt-4">
+                        <% for (review of listing.reviews) { %>
+                            <div class="col-md-5 mb-3">
+                                <div class="card shadow-sm">
+                                    <div class="card-body">
+                                        <h5 class="card-title" style="padding: 3px;">@<%= review.auther.username %>
+                                        </h5>
+                                        <p class="card-text" style="padding: 3px;">
+                                            <%= review.comment %>
+                                        </p>
+                                        <p class="text-warning">
+                                            <% for (let star=review.rating; star> 0; star--) { %>
+                                                ★
+                                                <% } %>
+                                        </p>
+                                        <form
+                                            action="/listings/<%= listing._id %>/reviews/<%=review._id%>?_method=DELETE"
+                                            method="post" style="padding: 3px;">
+                                            <button class="btn btn-sm btn-outline-danger">Delete</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <% } %>
+                    </div>
+                    <hr>
+
+                    <!-- Map Section -->
+                    <div class="row justify-content-center">
+                        <div class="col-md-10">
+                            <div id="map" data-lat="<%= cordinates.lat %>" data-lng="<%= cordinates.lng %>"
+                                data-lcn="<%= listing.title %>" class="border rounded shadow-sm" style="height: 400px;">
+                            </div>
+                        </div>
+                    </div>
+        </div>
+        <br>
+        <!-- Leaflet Map Script -->
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                if (typeof L === "undefined") {
+                    console.error("Leaflet.js not loaded properly!");
+                    return;
+                }
+                const mapDiv = document.getElementById('map');
+                const lat = parseFloat(mapDiv.dataset.lat);
+                const lng = parseFloat(mapDiv.dataset.lng);
+                const lcn = mapDiv.dataset.lcn;
+                console.log("Map Coordinates:", lat, lng);
+                var map = L.map('map').setView([lat, lng], 13);
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '© OpenStreetMap contributors'
+                }).addTo(map);
+                L.marker([lat, lng]).addTo(map).bindPopup(lcn).openPopup();
+            });
+            document.getElementById('shareButton').addEventListener('click', async () => {
+                if (navigator.share) {
+                    try {
+                        await navigator.share({
+                            title: '<%= listing.title %>', // Replace with your listing title
+                            text: '<%= listing.description %>', // Replace with your listing description
+                            url: window.location.href, // Or your listing's URL
+                        });
+                        console.log('Shared successfully!');
+                    } catch (error) {
+                        console.error('Error sharing:', error);
+                    }
+                } else {
+                    alert('Web Share API not supported. Please use another sharing method.');
+                }
+            });
+        </script>
+    </body>

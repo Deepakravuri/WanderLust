@@ -1,0 +1,138 @@
+<nav class="navbar navbar-expand-lg bg-body-light border-bottom sticky-top">
+  <div class="container-fluid">
+    <!-- Brand Logo -->
+    <a class="navbar-brand fw-bold text-primary" href="/listings">
+      <i class="fa-regular fa-compass"></i> WanderLust
+    </a>
+    <!-- Mobile Toggle Button -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <!-- Navbar Links -->
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-link fw-semibold" href="/listings">Explore</a>
+        <a class="nav-link fw-semibold" href="/listings/new">New</a>
+        <!-- Search Bar (Smaller Size) -->
+      </div>
+      <!-- Right-Aligned Links -->
+      <div class="navbar-nav ms-auto">
+        <% if (!curruser) { %>
+          <a href="/signup" class="nav-link fw-semibold">Signup</a>
+          <a href="/login" class="nav-link fw-semibold">Login</a>
+        <% } else { %>
+          <a href="/logout" class="nav-link fw-semibold text-danger">Logout</a>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</nav>
+<style>
+  .navbar {
+    padding: 12px 0;
+    transition: 0.3s ease-in-out;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(135deg, #a0cb11, #25e6fc); /* Deep purple to vibrant blue */
+  }
+  .navbar-brand {
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  }
+  .navbar-brand i {
+    margin-right: 8px;
+  }
+  .nav-link {
+    font-size: 1rem;
+    padding: 10px 15px;
+    transition: 0.3s ease-in-out;
+    color: #333;
+  }
+  .nav-link:hover, .nav-link.active {
+    color: #007bff !important;
+    background-color: rgba(0, 123, 255, 0.1);
+    border-radius: 5px;
+  }
+  .search-bar {
+    display: flex;
+    align-items: center;
+    max-width: 250px; /* Reduced width */
+    margin-left: 15px;
+    transition: 0.3s ease-in-out;
+  }
+  .search-input {
+    border-radius: 15px 0 0 15px; /* Smaller border-radius */
+    padding: 6px 10px; /* Reduced padding */
+    font-size: 0.85rem; /* Slightly smaller font */
+    border: 1px solid #ddd;
+    height: 32px; /* Reduced height */
+    transition: 0.3s ease-in-out;
+  }
+  .search-input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  }
+  .search-btn {
+    border-radius: 0 15px 15px 0;
+    padding: 6px 12px;
+    font-size: 0.9rem;
+    height: 32px; /* Match input height */
+    transition: 0.3s ease-in-out;
+  }
+  .search-btn:hover {
+    background-color: #007bff;
+    color: #fff;
+  }
+  .navbar-nav.ms-auto .nav-link {
+    margin-left: 10px;
+  }
+  .navbar-nav.ms-auto .nav-link:hover {
+    color: #007bff !important;
+    background-color: rgba(0, 123, 255, 0.1);
+    border-radius: 5px;
+  }
+  .navbar-nav.ms-auto .nav-link.text-danger:hover {
+    color: #dc3545 !important;
+    background-color: rgba(220, 53, 69, 0.1);
+  }
+  @media (max-width: 991px) {
+    .navbar-nav {
+      text-align: center;
+    }
+    .search-bar {
+      max-width: 100%;
+      margin: 10px auto;
+    }
+    .navbar-nav.ms-auto {
+      margin-top: 10px;
+    }
+  }
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
