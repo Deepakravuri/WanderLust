@@ -4,7 +4,6 @@ const wrapAsync = require("../utils/wrapAsync.js");
 const expressError = require("../utils/expressError.js");
 const { listingschema, reviewschema } = require("../schema.js");
 const Listing = require("../models/listing.js");
-const getNearbyAttractions = require("../utils/nearbyPlaces.js");
 const isValidCity = require("../utils/validateCity");
 
 async function getCoordinates(address) {
@@ -91,14 +90,13 @@ router.get("/:id", wrapAsync(async (req, res) => {
     .populate("owner").populate("messages.sender");
 
   const cordinates = await getCoordinates(listing.location);
-  const nearbyPlaces = await getNearbyAttractions(cordinates.lat, cordinates.lng);
 
   if (!listing) {
     req.flash("failure", "Listing not available");
     return res.redirect("/listings");
   }
 
-  res.render("Listingtempletes/show.ejs", { listing, cordinates,nearbyPlaces});
+  res.render("Listingtempletes/show.ejs", { listing, cordinates});
 }));
 
 router.post("/", isLoggedIn, validatelisting, wrapAsync(async (req, res) => {

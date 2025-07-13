@@ -61,4 +61,3 @@
       viewBtn.style.display = "none";
     });
   });
-

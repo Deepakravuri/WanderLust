@@ -158,21 +158,8 @@
     </div>
 
     <!-- Nearby Places -->
-    <div class="container mt-4">
-      <h4 class="text-center text-info mb-3">Nearby Attractions</h4>
-      <ul class="list-group">
-        <% if (nearbyPlaces.length === 0) { %>
-          <li class="list-group-item">No nearby places found.</li>
-        <% } else { %>
-          <% nearbyPlaces.forEach(place => { %>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-              <span><strong><%= place.name %></strong> (<%= place.type %>)</span>
-              <a href="https://www.google.com/maps?q=<%= place.lat %>,<%= place.lon %>" target="_blank" class="btn btn-sm btn-outline-primary">View</a>
-            </li>
-          <% }); %>
-        <% } %>
-      </ul>
-    </div>
+
+
   </div>
   <br>
 
