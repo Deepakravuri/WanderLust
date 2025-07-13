@@ -18,49 +18,57 @@
         </div>
         <div class="filter-option text-center">
           <a href="/listings/filters/ParkSpace">
-          <span class="filter-text fw-semibold">Parking</span> <br>
-          <i class="fa-solid fa-car fa-2x"></i>
-        </a>
+            <span class="filter-text fw-semibold">Parking</span> <br>
+            <i class="fa-solid fa-car fa-2x"></i>
+          </a>
         </div>
         <div class="filter-option text-center">
           <a href="/listings/filters/PetFriendly">
-          <span class="filter-text fw-semibold">Pet Friendly</span>
-          <i class="fa-solid fa-paw fa-2x"></i>
-        </a>
+            <span class="filter-text fw-semibold">Pet Friendly</span>
+            <i class="fa-solid fa-paw fa-2x"></i>
+          </a>
         </div>
         <div class="filter-option text-center">
           <a href="/listings/filters/Budget">
-          <span class="filter-text fw-semibold">On Budget</span>
-          <i class="fa-solid fa-tag fa-2x"></i>
-        </a>
+            <span class="filter-text fw-semibold">On Budget</span>
+            <i class="fa-solid fa-tag fa-2x"></i>
+          </a>
         </div>
         <div class="filter-option text-center">
           <a href="/listings/filters/BeachSide">
-          <span class="filter-text fw-semibold">Beachside</span>
-          <i class="fa-solid fa-umbrella-beach fa-2x"></i>
-        </a>
+            <span class="filter-text fw-semibold">Beachside</span>
+            <i class="fa-solid fa-umbrella-beach fa-2x"></i>
+          </a>
         </div>
         <div class="filter-option text-center">
           <a href="/listings/filters/Mountains">
-          <span class="filter-text fw-semibold">Mountains</span> <br>
-          <i class="fa-solid fa-mountain fa-2x"></i>
-        </a>
+            <span class="filter-text fw-semibold">Mountains</span> <br>
+            <i class="fa-solid fa-mountain fa-2x"></i>
+          </a>
         </div>
         <div class="filter-option text-center">
           <a href="/listings/filters/Boat">
-          <span class="filter-text fw-semibold">Boating</span>
-          <i class="fa-solid fa-sailboat fa-2x"></i>
-        </a>
-        </div>
-        <div class="price-toggle text-center ms-4">
-          <span class="fw-semibold">Show Prices with Taxes</span>
-          <label class="switch">
-            <input type="checkbox" id="priceToggle">
-            <span class="slider round"></span>
-          </label>
+            <span class="filter-text fw-semibold">Boating</span>
+            <i class="fa-solid fa-sailboat fa-2x"></i>
+          </a>
         </div>
       </div>
     </div>
+    <br>
+    <div class="d-flex justify-content-center mb-4">
+      <form method="GET" action="/listings/sort" class="d-flex align-items-center shadow-sm p-3 bg-white rounded">
+        <label for="sortBy" class="me-2 fw-bold text-secondary">
+          <i class="fas fa-sort-amount-down-alt me-1"></i> Sort by:
+        </label>
+        <select name="sortBy" id="sortBy" class="form-select w-auto" onchange="this.form.submit()">
+          <option disabled selected>Choose</option>
+          <option value="price_asc">💰 Price: Low to High</option>
+          <option value="price_desc">💸 Price: High to Low</option>
+          <option value="likes_desc">❤️ Most Liked</option>
+        </select>
+      </form>
+    </div>
+
 
     <!-- Listings Section -->
     <div class="container mt-4">
@@ -90,90 +98,89 @@
 
     <style>
       /* Filters Styling */
-.filter-option {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 12px;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: 0.3s ease-in-out;
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(10px);
-  width: 110px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-}
+      .filter-option {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 12px;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: 0.3s ease-in-out;
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(10px);
+        width: 110px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+      }
 
-.filter-option:hover {
-  background-color: rgba(255, 255, 255, 0.3);
-  transform: scale(1.05);
-}
+      .filter-option:hover {
+        background-color: rgba(255, 255, 255, 0.3);
+        transform: scale(1.05);
+      }
 
-.filter-text {
-  font-size: 15px;
-  color: #222;
-}
+      .filter-text {
+        font-size: 15px;
+        color: #222;
+      }
 
-/* Listing Cards */
-.listing-card {
-  border-radius: 15px;
-  transition: 0.3s ease-in-out;
-  overflow: hidden;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-}
+      /* Listing Cards */
+      .listing-card {
+        border-radius: 15px;
+        transition: 0.3s ease-in-out;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
 
-.listing-card:hover {
-  transform: scale(1.03);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-}
+      .listing-card:hover {
+        transform: scale(1.03);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      }
 
-/* Toggle Switch */
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 50px;
-  height: 26px;
-}
+      /* Toggle Switch */
+      .switch {
+        position: relative;
+        display: inline-block;
+        width: 50px;
+        height: 26px;
+      }
 
-.switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
+      .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
 
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  transition: 0.4s;
-  border-radius: 26px;
-}
+      .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        transition: 0.4s;
+        border-radius: 26px;
+      }
 
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 18px;
-  width: 18px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  transition: 0.4s;
-  border-radius: 50%;
-}
+      .slider:before {
+        position: absolute;
+        content: "";
+        height: 18px;
+        width: 18px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        transition: 0.4s;
+        border-radius: 50%;
+      }
 
-input:checked + .slider {
-  background: linear-gradient(45deg, #ff6b6b, #007bff);
-}
+      input:checked+.slider {
+        background: linear-gradient(45deg, #ff6b6b, #007bff);
+      }
 
-input:checked + .slider:before {
-  transform: translateX(24px);
-}
-
+      input:checked+.slider:before {
+        transform: translateX(24px);
+      }
     </style>
 
     <script>

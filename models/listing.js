@@ -2,6 +2,18 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const Review = require("./reviews.js");
 
+const messageSchema = new mongoose.Schema({
+  sender: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User"
+  },
+  content: String,
+  timestamp: {
+    type: Date,
+    default: Date.now
+  }
+});
+
 const listingSchema = new Schema({
     title : {
         type: String,
@@ -34,7 +46,16 @@ const listingSchema = new Schema({
     },
     filter:{
         type: String,
-    }
+    },
+    likes: {
+    type: Number,
+    default: 0,
+    },
+    likedBy: [{ type: Schema.Types.ObjectId, ref: "User" }],
+    messages: {
+    type: [messageSchema],
+    default: []   // ✅ this is important
+  }
 });
 
 listingSchema.post("findOneAndDelete",async(listing)=>{
