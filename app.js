@@ -24,10 +24,10 @@ const User = require("./models/users.js");
 // Database connection
 mongoose.connect(MONGO_URL)
   .then(() => {
-    console.log("✅ MongoDB Connected");
+    console.log(" MongoDB Connected");
   })
   .catch((err) => {
-    console.error("❌ MongoDB Connection Error:", err);
+    console.error(" MongoDB Connection Error:", err);
   });
 
 // Session config
@@ -73,6 +73,10 @@ app.use((req, res, next) => {
 app.get("/", (req, res) => {
   res.redirect("/listings");
 });
+app.use((req, res, next) => {
+  console.log(`🧭 ${req.method} ${req.path}`);
+  next();
+});
 
 app.use("/listings", listingroute);
 app.use("/listings/:id/reviews", reviewroute);
@@ -91,5 +95,5 @@ app.use((err, req, res, next) => {
 // Start server
 const port = process.env.PORT || 8080;
 app.listen(port, () => {
-  console.log(`🚀 Server running on port ${port}`);
+  console.log(` Server running on port ${port}`);
 });

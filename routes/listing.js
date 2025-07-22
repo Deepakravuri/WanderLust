@@ -6,6 +6,14 @@ const { listingschema, reviewschema } = require("../schema.js");
 const Listing = require("../models/listing.js");
 const isValidCity = require("../utils/validateCity");
 
+function calculateAverageRating(listing) {
+  if (!listing.reviews || listing.reviews.length === 0) return 0;
+
+  const total = listing.reviews.reduce((sum, r) => sum + r.rating, 0);
+  return total / listing.reviews.length;
+}
+
+
 async function getCoordinates(address) {
     const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`;
     const response = await fetch(url);
@@ -88,7 +96,8 @@ router.get("/:id", wrapAsync(async (req, res) => {
   const listing = await Listing.findById(id)
     .populate({ path: "reviews", populate: { path: "auther" } })
     .populate("owner").populate("messages.sender");
-
+  
+  const avgRating = calculateAverageRating(listing);
   const cordinates = await getCoordinates(listing.location);
 
   if (!listing) {
@@ -96,7 +105,7 @@ router.get("/:id", wrapAsync(async (req, res) => {
     return res.redirect("/listings");
   }
 
-  res.render("Listingtempletes/show.ejs", { listing, cordinates});
+  res.render("Listingtempletes/show.ejs", { listing, cordinates,avgRating});
 }));
 
 router.post("/", isLoggedIn, validatelisting, wrapAsync(async (req, res) => {

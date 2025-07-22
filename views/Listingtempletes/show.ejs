@@ -45,6 +45,7 @@
             <div class="d-flex gap-3 mt-3">
               <span class="badge bg-success fs-6">₹ <%= listing.price.toLocaleString("en-IN") %></span>
               <span class="badge bg-info text-dark fs-6"><%= listing.filter %></span>
+              <span class="badge bg-info text-dark fs-6"><%= avgRating.toFixed(1) %>★</span>
             </div>
           </div>
         </div>
@@ -82,23 +83,36 @@
     <% } %>
 
     <!-- Contact Owner -->
-    <% if (curruser && !curruser._id.equals(listing.owner._id)) { %>
-      <div class="row justify-content-center mb-4">
-        <div class="col-md-8">
-          <div class="card shadow-sm">
-            <div class="card-header bg-primary text-white">Contact Owner</div>
-            <div class="card-body">
-              <form action="/listings/<%= listing._id %>/message" method="POST">
-                <div class="mb-3">
-                  <textarea name="message" class="form-control" rows="3" placeholder="Write your message..." required></textarea>
-                </div>
-                <button class="btn btn-primary w-100">Send Message</button>
-              </form>
+   <% if (curruser && !curruser._id.equals(listing.owner._id)) { %>
+  <div class="row justify-content-center mb-4">
+    <div class="col-md-8 col-lg-6">
+      <div class="card shadow rounded-4 border-0 overflow-hidden">
+        <div class="card-header bg-primary text-white py-2 px-3 rounded-top-4">
+          <h6 class="mb-0 fw-semibold">Contact Owner</h6>
+        </div>
+        <div class="card-body p-3">
+          <form action="/listings/<%= listing._id %>/message" method="POST">
+            <div class="form-floating mb-2">
+              <textarea
+                name="message"
+                class="form-control rounded-3"
+                id="messageBox"
+                placeholder="Write your message..."
+                style="height: 60px; resize: none;"
+                required
+              ></textarea>
+              <label for="messageBox">Write your message...</label>
             </div>
-          </div>
+            <button class="btn btn-sm btn-primary w-100 fw-semibold rounded-3">
+              📨 Send Message
+            </button>
+          </form>
         </div>
       </div>
-    <% } %>
+    </div>
+  </div>
+<% } %>
+
 
     <!-- Rate Us -->
     <% if (curruser && !curruser._id.equals(listing.owner._id)) { %>
